@@ -28,11 +28,11 @@ license that can be found in the LICENSE file.
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../polymer-collapse/polymer-collapse.html">
 
-<polymer-element name="polymer-ui-collapsible" attributes="active notap">
+<polymer-element name="polymer-ui-collapsible" attributes="active notap" >
   <template>
     <link rel="stylesheet" href="polymer-ui-collapsible.css">
     <div on-tap="{{headerTap}}">
-      <content select=".polymer-ui-collapsible-header"></content>
+      <content select=".polymer-ui-collapsible-header" class="pouet"></content>
     </div>
     <div id="collapsibleBody" on-tap="{{bodyTap}}">
       <content></content>
@@ -64,6 +64,10 @@ license that can be found in the LICENSE file.
        */
       toggle: function() {
         this.active = !this.active;
+
+        var className = "polymer-ui-collapsible-active"
+        this.className = this.className.replace(/(?:^|\s)polymer-ui-collapsible-active(?!\S)/g , '' )
+        if(this.active) this.className += " polymer-ui-collapsible-active";
       },
       headerTap: function() {
         if (!this.notap) {
@@ -72,6 +76,12 @@ license that can be found in the LICENSE file.
       },
       bodyTap: function(e) {
         e.notap = true;
+      },
+      enteredView: function(e)
+      {
+        var className = "polymer-ui-collapsible-active"
+        this.className = this.className.replace(/(?:^|\s)polymer-ui-collapsible-active(?!\S)/g , '' )
+        if(this.active) this.className += " polymer-ui-collapsible-active";
       }
     });
   </script>
